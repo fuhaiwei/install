@@ -32,7 +32,8 @@ else
   GROUP="$(id -gn)"
   TOUCH="/bin/touch"
 fi
-BREW_REPO="https://github.com/Homebrew/brew"
+BREW_REPO="https://mirrors.aliyun.com/homebrew/brew.git"
+BREW_CORE_REPO="https://mirrors.aliyun.com/homebrew/homebrew-core.git"
 
 # TODO: bump version when new macOS is released
 MACOS_LATEST_SUPPORTED="10.15"
@@ -511,7 +512,7 @@ ohai "Downloading and installing Homebrew..."
 
   execute "ln" "-sf" "${HOMEBREW_REPOSITORY}/bin/brew" "${HOMEBREW_PREFIX}/bin/brew"
 
-  execute "${HOMEBREW_PREFIX}/bin/brew" "update" "--force"
+  execute "git" "clone" "${BREW_CORE_REPO}" "${HOMEBREW_REPOSITORY}/Library/Taps/homebrew/homebrew-core"
 )
 
 if [[ ":${PATH}:" != *":${HOMEBREW_PREFIX}/bin:"* ]]; then
